@@ -18,6 +18,18 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AbstractBlock.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AbstractBlock.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="GlobalVars.h" />
+    <ClInclude Include="map.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
