@@ -104,31 +104,14 @@ inline std::pair<short, short>
 BlockModel::GetItemPosition(const short &x, const short &y) {
   switch (this->cur_rotation) {
   case AbstractBlockModel::types_rotation::rotate_0:
-
     return {x, y};
   case AbstractBlockModel::types_rotation::rotate_90:
-
     return {y, max_row - x - 1};
   case AbstractBlockModel::types_rotation::rotate_180:
-
     return {max_col - x - 1, max_row - y - 1};
   case AbstractBlockModel::types_rotation::rotate_270:
-
     return {max_col - y - 1, x};
   }
-  /*case AbstractBlockModel::types_rotation::rotate_0:
-      
-return { x,y };
-  case AbstractBlockModel::types_rotation::rotate_90:
-      
-return { y,x };
-  case AbstractBlockModel::types_rotation::rotate_180:
-      
-return { max_col - x - 1, max_row - y - 1 };
-  case AbstractBlockModel::types_rotation::rotate_270:
-      
-return { max_col - y - 1, max_row - x - 1 };
-  }*/
 }
 
 void BlockModel::SetModelSize(unsigned short col_count,
