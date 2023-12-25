@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/.clang-format
+/.clang-format.bak
+/.cmake-format.bak

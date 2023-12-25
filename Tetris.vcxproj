@@ -30,6 +30,12 @@
     <ClInclude Include="GlobalVars.h" />
     <ClInclude Include="map.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".clang-format" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="files_for_format" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
