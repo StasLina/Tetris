@@ -21,10 +21,8 @@ public:
 
     if (index1.x_size <= index2.x_size &&
         index1.y_size <= index2.y_size) {
-
       return true;
     } else {
-
       return false;
     }
   }
@@ -33,10 +31,8 @@ public:
 
     if (index1.x_size >= index2.x_size &&
         index1.y_size >= index2.y_size) {
-
       return true;
     } else {
-
       return false;
     }
   }
@@ -58,7 +54,6 @@ class AbstractModel {
 public:
   virtual const ModelIndex &GetModelIndex(short const &pox_x,
                                           const short &pos_y) {
-
     return ModelIndex();
   };
   virtual void SetModelIndex(const ModelIndex &smth_index,
@@ -67,7 +62,6 @@ public:
   virtual unsigned short GetXSize() { return 0; }
   virtual unsigned short GetYSize() { return 0; }
   virtual void SetModelSize(unsigned short x, unsigned short y) {
-
     return;
   };
   virtual void data_changed(){};
@@ -117,7 +111,6 @@ public:
       ++col;
       ++n;
     }
-
     return *col;
   };
   void SetModelIndex(const ModelIndex &smth_index, const short &pos_x,
@@ -185,24 +178,19 @@ public:
     if (this->cur_max < cur_max) {
 
       if (cur_max == this->data.size()) {
-
         return true;
       } else {
         this->cur_max = cur_max;
-
         return false;
       }
     }
-
     return false;
   }
   bool isMax() {
 
     if (this->cur_max >= this->GetYSize() - 1) {
-
       return true;
     }
-
     return false;
   }
 };
