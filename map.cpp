@@ -126,23 +126,27 @@ void MapController::Draw() {
   // top indent
   char fill_char = '$';
 
-  for (int cur_row_indent = 0; cur_row_indent != my_indent.top - 1; ++cur_row_indent) {
+  for (int cur_row_indent = 0; cur_row_indent != my_indent.top - 1;
+       ++cur_row_indent) {
     res_map_str = "";
 
-    for (int cur_indent = 0; cur_indent != my_indent.left - 1; ++cur_indent) {
+    for (int cur_indent = 0; cur_indent != my_indent.left - 1;
+         ++cur_indent) {
       res_map_str += fill_char;
     }
     res_map_str += '$';
 
     for (short cur_col = 0; cur_col != x; ++cur_col) {
 
-      for (short cur_indent = 0; cur_indent != GlobalVars::wide_scale; ++cur_indent) {
+      for (short cur_indent = 0; cur_indent != GlobalVars::wide_scale;
+           ++cur_indent) {
         res_map_str += fill_top;
       }
     }
     res_map_str += '$';
 
-    for (int cur_indent = 1; cur_indent != my_indent.right; ++cur_indent) {
+    for (int cur_indent = 1; cur_indent != my_indent.right;
+         ++cur_indent) {
       res_map_str += fill_char;
     }
 
@@ -155,20 +159,23 @@ void MapController::Draw() {
   // top indent last
   res_map_str = "";
 
-  for (int cur_indent = 0; cur_indent != my_indent.left - 1; ++cur_indent) {
+  for (int cur_indent = 0; cur_indent != my_indent.left - 1;
+       ++cur_indent) {
     res_map_str += '-';
   }
   res_map_str += '$';
 
   for (short cur_col = 0; cur_col != x; ++cur_col) {
 
-    for (short cur_indent = 0; cur_indent != GlobalVars::wide_scale; ++cur_indent) {
+    for (short cur_indent = 0; cur_indent != GlobalVars::wide_scale;
+         ++cur_indent) {
       res_map_str += fill_top;
     }
   }
   res_map_str += '$';
 
-  for (int cur_indent = 1; cur_indent != my_indent.right; ++cur_indent) {
+  for (int cur_indent = 1; cur_indent != my_indent.right;
+       ++cur_indent) {
     res_map_str += '-';
   }
 
@@ -183,7 +190,8 @@ void MapController::Draw() {
   for (short cur_row = y - 1; cur_row != -1; --cur_row) {
     res_map_str = "";
 
-    for (int cur_indent = 0; cur_indent != my_indent.left - 1; ++cur_indent) {
+    for (int cur_indent = 0; cur_indent != my_indent.left - 1;
+         ++cur_indent) {
       res_map_str += fill_char;
     }
 
@@ -191,7 +199,8 @@ void MapController::Draw() {
 
     for (short cur_col = 0; cur_col != x; ++cur_col) {
 
-      for (short cur_indent = 0; cur_indent != GlobalVars::wide_scale; ++cur_indent) {
+      for (short cur_indent = 0; cur_indent != GlobalVars::wide_scale;
+           ++cur_indent) {
         res_map_str +=
          map_model->GetModelIndex(cur_col, cur_row).data;
       }
@@ -199,7 +208,8 @@ void MapController::Draw() {
 
     res_map_str += '$';
 
-    for (int cur_indent = 1; cur_indent != my_indent.right; cur_indent++) {
+    for (int cur_indent = 1; cur_indent != my_indent.right;
+         cur_indent++) {
       res_map_str += fill_char;
     }
 
@@ -211,23 +221,27 @@ void MapController::Draw() {
   }
   // indent bot
 
-  for (int cur_row_indent = 0; cur_row_indent != my_indent.bot; cur_row_indent++) {
+  for (int cur_row_indent = 0; cur_row_indent != my_indent.bot;
+       cur_row_indent++) {
     res_map_str = "";
 
-    for (int cur_indent = 0; cur_indent != my_indent.left - 1; cur_indent++) {
+    for (int cur_indent = 0; cur_indent != my_indent.left - 1;
+         cur_indent++) {
       res_map_str += fill_char;
     }
     res_map_str += '$';
 
     for (short cur_col = 0; cur_col != x; ++cur_col) {
 
-      for (short cur_scale = 0; cur_scale != GlobalVars::wide_scale; ++cur_scale) {
+      for (short cur_scale = 0; cur_scale != GlobalVars::wide_scale;
+           ++cur_scale) {
         res_map_str += '$';
       }
     }
     res_map_str += '$';
 
-    for (int cur_indent = 1; cur_indent != my_indent.right; cur_indent++) {
+    for (int cur_indent = 1; cur_indent != my_indent.right;
+         cur_indent++) {
       res_map_str += fill_char;
     }
     // res_map += '\n';
@@ -280,7 +294,8 @@ void MapController::Draw() {
     auto n = rand() % AbstractModel::list_bloks.size();
     auto smth_elm = AbstractModel::list_bloks.begin();
 
-    for (size_t cur_offset_elm = 0; cur_offset_elm != n; ++cur_offset_elm) {
+    for (size_t cur_offset_elm = 0; cur_offset_elm != n;
+         ++cur_offset_elm) {
       ++smth_elm;
     }
     auto elm = smth_elm->second->GetCopy();

@@ -166,7 +166,8 @@ public:
     std::list<std::vector<ModelIndex>>::iterator it =
      this->data.begin();
 
-    for (int cur_offset_row = 0; cur_offset_row != smth_index_row; ++cur_offset_row, ++it)
+    for (int cur_offset_row = 0; cur_offset_row != smth_index_row;
+         ++cur_offset_row, ++it)
       ;
     this->data.erase(it);
     this->data.push_back(std::vector<ModelIndex>());
