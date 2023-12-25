@@ -1,8 +1,8 @@
 #include "map.h"
 
 MapController::MapController() {
-  this->x = GlobalVars::x_size;
-  this->y = GlobalVars::y_size;
+  this->coord_x = GlobalVars::x_size;
+  this->coord_y = GlobalVars::y_size;
   map_model = 0;
 }
 
@@ -22,16 +22,16 @@ void MapController::AddFirstSmthElm(AbstractModel *elm) {
   short height = elm->GetYSize();
 
   if (proverka_size(wide, height)) {
-    this->elm.cur.x = (x / 2) - (wide / 2);
+    this->elm.cur.coord_x = (coord_x / 2) - (wide / 2);
 
-    if (this->elm.cur.x < 0) {
-      this->elm.cur.x = 0;
+    if (this->elm.cur.coord_x < 0) {
+      this->elm.cur.coord_x = 0;
     }
-    this->elm.cur.y = y + my_indent.top;
-    this->elm.min.x = 0;
-    this->elm.min.y = 0;
-    this->elm.max.x = x - wide;
-    this->elm.max.y = y - height;
+    this->elm.cur.coord_y = coord_y + my_indent.top;
+    this->elm.min.coord_x = 0;
+    this->elm.min.coord_y = 0;
+    this->elm.max.coord_x = coord_x - wide;
+    this->elm.max.coord_y = coord_y - height;
   } else {
     // game over
   }
@@ -52,16 +52,16 @@ void MapController::AddSecondSmthElm(AbstractModel *elm) {
   short height = elm->GetYSize();
 
   if (proverka_size(wide, height)) {
-    this->elm2.cur.x = (x / 2) - (wide / 2);
+    this->elm2.cur.coord_x = (coord_x / 2) - (wide / 2);
 
-    if (this->elm2.cur.x < 0) {
-      this->elm2.cur.x = 0;
+    if (this->elm2.cur.coord_x < 0) {
+      this->elm2.cur.coord_x = 0;
     }
-    this->elm2.cur.y = y + my_indent.top;
-    this->elm2.min.x = 0;
-    this->elm2.min.y = 0;
-    this->elm2.max.x = x - wide;
-    this->elm2.max.y = y - height;
+    this->elm2.cur.coord_y = coord_y + my_indent.top;
+    this->elm2.min.coord_x = 0;
+    this->elm2.min.coord_y = 0;
+    this->elm2.max.coord_x = coord_x - wide;
+    this->elm2.max.coord_y = coord_y - height;
   }
 }
 void MapController::Draw() {
@@ -136,7 +136,7 @@ void MapController::Draw() {
     }
     res_map_str += '$';
 
-    for (short cur_col = 0; cur_col != x; ++cur_col) {
+    for (short cur_col = 0; cur_col != coord_x; ++cur_col) {
 
       for (short cur_indent = 0; cur_indent != GlobalVars::wide_scale;
            ++cur_indent) {
@@ -165,7 +165,7 @@ void MapController::Draw() {
   }
   res_map_str += '$';
 
-  for (short cur_col = 0; cur_col != x; ++cur_col) {
+  for (short cur_col = 0; cur_col != coord_x; ++cur_col) {
 
     for (short cur_indent = 0; cur_indent != GlobalVars::wide_scale;
          ++cur_indent) {
@@ -187,7 +187,7 @@ void MapController::Draw() {
 
   // карта
 
-  for (short cur_row = y - 1; cur_row != -1; --cur_row) {
+  for (short cur_row = coord_y - 1; cur_row != -1; --cur_row) {
     res_map_str = "";
 
     for (int cur_indent = 0; cur_indent != my_indent.left - 1;
@@ -197,7 +197,7 @@ void MapController::Draw() {
 
     res_map_str += '$';
 
-    for (short cur_col = 0; cur_col != x; ++cur_col) {
+    for (short cur_col = 0; cur_col != coord_x; ++cur_col) {
 
       for (short cur_indent = 0; cur_indent != GlobalVars::wide_scale;
            ++cur_indent) {
@@ -231,7 +231,7 @@ void MapController::Draw() {
     }
     res_map_str += '$';
 
-    for (short cur_col = 0; cur_col != x; ++cur_col) {
+    for (short cur_col = 0; cur_col != coord_x; ++cur_col) {
 
       for (short cur_scale = 0; cur_scale != GlobalVars::wide_scale;
            ++cur_scale) {
@@ -258,7 +258,7 @@ void MapController::Draw() {
   int add_counter_app_str = 0;
 
   for (short cur_row = 0; cur_row != elm_row_end; ++cur_row) {
-    fix_row = y - 1 - elm.cur.y - cur_row + my_indent.top;
+    fix_row = coord_y - 1 - elm.cur.coord_y - cur_row + my_indent.top;
 
     auto smth_row = res_map.begin();
 
@@ -266,7 +266,7 @@ void MapController::Draw() {
       ;
 
     for (short cur_col = 0; cur_col != elm_col_end; ++cur_col) {
-      fix_col = +cur_col + elm.cur.x;
+      fix_col = +cur_col + elm.cur.coord_x;
       const char &symb =
        elm.smth_elm_model->GetModelIndex(cur_col, cur_row).data;
 
@@ -291,10 +291,10 @@ void MapController::Draw() {
   }
 
   if (GlobalVars::need_new_block) {
-    auto n = rand() % AbstractModel::list_bloks.size();
+    auto rand_elm_index = rand() % AbstractModel::list_bloks.size();
     auto smth_elm = AbstractModel::list_bloks.begin();
 
-    for (size_t cur_offset_elm = 0; cur_offset_elm != n;
+    for (size_t cur_offset_elm = 0; cur_offset_elm != rand_elm_index;
          ++cur_offset_elm) {
       ++smth_elm;
     }
@@ -316,7 +316,7 @@ void MapController::MoveLeft() {
 
   if (VerifyUpdate()) {
     pos new_pos = elm.cur;
-    --new_pos.x;
+    --new_pos.coord_x;
 
     if (proverka_cancel_moving_left(new_pos) == false) {
       elm.cur = new_pos;
@@ -335,7 +335,7 @@ void MapController::MoveRight() {
 
   if (VerifyUpdate()) {
     pos new_pos = elm.cur;
-    ++new_pos.x;
+    ++new_pos.coord_x;
 
     if (proverka_cancel_moving_right(new_pos) == false) {
       elm.cur = new_pos;
@@ -359,7 +359,7 @@ void MapController::MoveDown(bool user) {
 
   if (VerifyUpdate()) {
     pos new_pos = elm.cur;
-    --new_pos.y;
+    --new_pos.coord_y;
 
     if (proverka_cancel_moving_down(new_pos) == false) {
       elm.cur = new_pos;
@@ -382,9 +382,9 @@ void MapController::MoveAbove() {
 
   if (VerifyUpdate()) {
     pos new_pos = elm.cur;
-    ++new_pos.y;
+    ++new_pos.coord_y;
 
-    if (new_pos.y <= elm.max.y) {
+    if (new_pos.coord_y <= elm.max.coord_y) {
       elm.cur = new_pos;
     }
   }
@@ -399,16 +399,16 @@ void MapController::data_changed() {
   elm.swap();
   auto old_pos_cur = elm.cur;
 
-  if (elm.cur.x < elm.min.x) {
-    elm.cur.x = elm.min.x;
+  if (elm.cur.coord_x < elm.min.coord_x) {
+    elm.cur.coord_x = elm.min.coord_x;
   }
 
-  if (elm.cur.y < elm.min.y) {
-    elm.cur.y = elm.min.y;
+  if (elm.cur.coord_y < elm.min.coord_y) {
+    elm.cur.coord_y = elm.min.coord_y;
   }
 
-  if (elm.cur.x > elm.max.x) {
-    elm.cur.x = elm.max.x;
+  if (elm.cur.coord_x > elm.max.coord_x) {
+    elm.cur.coord_x = elm.max.coord_x;
   }
 
   if (new_shape_exsist()) {
@@ -455,7 +455,7 @@ bool MapController::VerifyUpdate() {
 
 bool MapController::proverka_cancel_moving() {
 
-  if (elm.cur.y == 0) {
+  if (elm.cur.coord_y == 0) {
 
     return true;
   }
@@ -471,7 +471,7 @@ bool MapController::proverka_cancel_moving() {
 
       if (char_block != ' ') {
         const char char_map =
-         map_model->GetModelIndex(elm.cur.x + c, elm.cur.y + r - 1)
+         map_model->GetModelIndex(elm.cur.coord_x + c, elm.cur.coord_y + r - 1)
           .data;
 
         if (char_map != ' ') {
@@ -497,13 +497,13 @@ bool MapController::save_block_to_map() {
        elm.smth_elm_model->GetModelIndex(c, r).data;
 
       if (char_block != ' ') {
-        map_model->SetModelIndex(char_block, elm.cur.x + c,
-                                 elm.cur.y + r);
+        map_model->SetModelIndex(char_block, elm.cur.coord_x + c,
+                                 elm.cur.coord_y + r);
       }
     }
   }
 
-  return map_model->SetMax(elm.cur.y + size_y - 1);
+  return map_model->SetMax(elm.cur.coord_y + size_y - 1);
 }
 
 void MapController::proverka_rows() {
@@ -519,7 +519,7 @@ void MapController::proverka_rows() {
 
     for (short c = 0; c != size_x; ++c) {
       const char &char_map =
-       map_model->GetModelIndex(c, elm.cur.y + r - count_del_row)
+       map_model->GetModelIndex(c, elm.cur.coord_y + r - count_del_row)
         .data;
 
       if (char_map == ' ') {
@@ -528,7 +528,7 @@ void MapController::proverka_rows() {
     }
 
     if (perverka) {
-      map_model->DeleteRow(elm.cur.y + r - count_del_row);
+      map_model->DeleteRow(elm.cur.coord_y + r - count_del_row);
       ++count_del_row;
       score += 10;
     }
@@ -537,12 +537,12 @@ void MapController::proverka_rows() {
 
 bool MapController::proverka_cancel_moving_down(const pos &smth_pos) {
 
-  if (smth_pos.y < elm.min.y) {
+  if (smth_pos.coord_y < elm.min.coord_y) {
 
     return true;
   }
 
-  if (smth_pos.y >= elm.min.y) {
+  if (smth_pos.coord_y >= elm.min.coord_y) {
     auto size_x = elm.smth_elm_model->GetXSize();
     auto size_y =
      get_size_y_into_map(); // elm.smth_elm_model->GetYSize();
@@ -555,7 +555,7 @@ bool MapController::proverka_cancel_moving_down(const pos &smth_pos) {
 
         if (char_block != ' ') {
           const char char_map =
-           map_model->GetModelIndex(elm.cur.x + c, elm.cur.y + r - 1)
+           map_model->GetModelIndex(elm.cur.coord_x + c, elm.cur.coord_y + r - 1)
             .data;
 
           if (char_map != ' ') {
@@ -573,17 +573,17 @@ bool MapController::proverka_cancel_moving_down(const pos &smth_pos) {
 
 bool MapController::proverka_cancel_moving_left(const pos &smth_pos) {
 
-  if (smth_pos.x < elm.min.x) {
+  if (smth_pos.coord_x < elm.min.coord_x) {
 
     return true;
   }
 
-  if (smth_pos.x == elm.min.x) {
+  if (smth_pos.coord_x == elm.min.coord_x) {
 
     return false;
   }
 
-  if (smth_pos.x > elm.min.x) {
+  if (smth_pos.coord_x > elm.min.coord_x) {
     auto size_x = this->elm.smth_elm_model->GetXSize();
     auto size_y =
      get_size_y_into_map(); // elm.smth_elm_model->GetYSize();
@@ -597,7 +597,7 @@ bool MapController::proverka_cancel_moving_left(const pos &smth_pos) {
 
         if (char_block != ' ') {
           const char char_map =
-           map_model->GetModelIndex(elm.cur.x + c - 1, elm.cur.y + r)
+           map_model->GetModelIndex(elm.cur.coord_x + c - 1, elm.cur.coord_y + r)
             .data;
 
           if (char_map != ' ') {
@@ -616,17 +616,17 @@ bool MapController::proverka_cancel_moving_left(const pos &smth_pos) {
 bool MapController::proverka_cancel_moving_right(
  const pos &smth_pos) {
 
-  if (smth_pos.x > elm.max.x) {
+  if (smth_pos.coord_x > elm.max.coord_x) {
 
     return true;
   }
 
-  if (smth_pos.x == elm.max.x) {
+  if (smth_pos.coord_x == elm.max.coord_x) {
 
     return false;
   }
 
-  if (smth_pos.x < elm.max.x) {
+  if (smth_pos.coord_x < elm.max.coord_x) {
     auto size_x = this->elm.smth_elm_model->GetXSize();
     auto size_y =
      get_size_y_into_map(); // elm.smth_elm_model->GetYSize(); //
@@ -639,7 +639,7 @@ bool MapController::proverka_cancel_moving_right(
 
         if (char_block != ' ') {
           const char char_map =
-           map_model->GetModelIndex(elm.cur.x + c + 1, elm.cur.y + r)
+           map_model->GetModelIndex(elm.cur.coord_x + c + 1, elm.cur.coord_y + r)
             .data;
 
           if (char_map != ' ') {
@@ -658,13 +658,13 @@ bool MapController::proverka_cancel_moving_right(
 unsigned short MapController::get_size_y_into_map() {
   auto size_y = elm.smth_elm_model->GetYSize();
   short correction_z = 0;              // если выше
-  int max = map_model->GetYSize() - 1; // elm.max.y + my_indent.top;
+  int max = map_model->GetYSize() - 1; // elm.max.coord_y + my_indent.top;
 
-  if (elm.cur.y > max) {
+  if (elm.cur.coord_y > max) {
 
     return 0;
   } else {
-    auto diff = max - elm.cur.y + 1;
+    auto diff = max - elm.cur.coord_y + 1;
 
     if (diff < size_y) {
       size_y = diff;
@@ -678,13 +678,13 @@ unsigned short MapController::get_size_y_into_visible() {
   auto size_y = elm.smth_elm_model->GetYSize();
   short correction_z = 0; // если выше
   int max = map_model->GetYSize() + my_indent.top -
-            1; // elm.max.y + my_indent.top;
+            1; // elm.max.coord_y + my_indent.top;
 
-  if (elm.cur.y > max) {
+  if (elm.cur.coord_y > max) {
 
     return 0;
   } else {
-    auto diff = max - elm.cur.y + 1;
+    auto diff = max - elm.cur.coord_y + 1;
 
     if (diff < size_y) {
       size_y = diff;
@@ -709,7 +709,7 @@ bool MapController::new_shape_exsist() {
 
       if (char_block != ' ') {
         const char char_map =
-         map_model->GetModelIndex(elm.cur.x + c, elm.cur.y + r).data;
+         map_model->GetModelIndex(elm.cur.coord_x + c, elm.cur.coord_y + r).data;
 
         if (char_map != ' ') {
           proverka = false;

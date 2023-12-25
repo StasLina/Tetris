@@ -7,15 +7,15 @@ const ModelIndex &BlockModel::GetModelIndex(const short &pos_x,
   short test_x = pair.first;
   short test_y = pair.second;
   auto row = data_model.begin();
-  int n;
+  int cur_offset;
 
-  for (n = 0; n != test_y; ++n) {
+  for (cur_offset = 0; cur_offset != test_y; ++cur_offset) {
     ++row;
   }
 
   elm = row->begin();
 
-  for (n = 0; n != test_x; ++n) {
+  for (cur_offset = 0; cur_offset != test_x; ++cur_offset) {
     ++elm;
   }
 
@@ -26,14 +26,14 @@ void BlockModel::SetModelIndex(const ModelIndex &smth_data,
                                const short &pos_x,
                                const short &pos_y) {
   auto row = data_model.begin();
-  int n;
+  int cur_offset;
 
-  for (n = 0; n != pos_y; ++n) {
+  for (cur_offset = 0; cur_offset != pos_y; ++cur_offset) {
     ++row;
   }
   auto elm = row->begin();
 
-  for (n = 0; n != pos_x; ++n) {
+  for (cur_offset = 0; cur_offset != pos_x; ++cur_offset) {
     ++elm;
   }
   *elm = smth_data;
@@ -101,16 +101,16 @@ void BlockModel::SetBlokShape(const std::string &smth_str) {
 }
 
 inline std::pair<short, short>
-BlockModel::GetItemPosition(const short &x, const short &y) {
+BlockModel::GetItemPosition(const short &coord_x, const short &coord_y) {
   switch (this->cur_rotation) {
   case AbstractBlockModel::types_rotation::rotate_0:
-    return {x, y};
+    return {coord_x, coord_y};
   case AbstractBlockModel::types_rotation::rotate_90:
-    return {y, max_row - x - 1};
+    return {coord_y, max_row - coord_x - 1};
   case AbstractBlockModel::types_rotation::rotate_180:
-    return {max_col - x - 1, max_row - y - 1};
+    return {max_col - coord_x - 1, max_row - coord_y - 1};
   case AbstractBlockModel::types_rotation::rotate_270:
-    return {max_col - y - 1, x};
+    return {max_col - coord_y - 1, coord_x};
   }
 }
 

@@ -7,7 +7,7 @@
 #include <ostream>
 #include <vector>
 struct pos {
-  int x, y;
+  int coord_x, coord_y;
 };
 
 class GlobalVars {
@@ -61,7 +61,7 @@ public:
                              const short &pos_y){};
   virtual unsigned short GetXSize() { return 0; }
   virtual unsigned short GetYSize() { return 0; }
-  virtual void SetModelSize(unsigned short x, unsigned short y) {
+  virtual void SetModelSize(unsigned short coord_x, unsigned short coord_y) {
     return;
   };
   virtual void data_changed(){};
@@ -81,10 +81,10 @@ public:
     auto x_size = model->GetXSize();
     auto y_size = model->GetYSize();
 
-    for (unsigned short y = 0; y != y_size; y++) {
+    for (unsigned short coord_y = 0; coord_y != y_size; coord_y++) {
 
-      for (unsigned short x = 0; x != x_size; x++) {
-        std::cout << model->GetModelIndex(x, y);
+      for (unsigned short coord_x = 0; coord_x != x_size; coord_x++) {
+        std::cout << model->GetModelIndex(coord_x, coord_y);
       }
       std::cout << std::endl;
     }
@@ -133,13 +133,13 @@ public:
   };
   unsigned short GetXSize() override { return data.begin()->size(); }
   unsigned short GetYSize() override { return data.size(); }
-  void SetModelSize(unsigned short x, unsigned short y) override {
-    data.resize(y);
+  void SetModelSize(unsigned short coord_x, unsigned short coord_y) override {
+    data.resize(coord_y);
     auto row = data.begin();
     short n = 0;
 
-    while (n != y) {
-      row->resize(x);
+    while (n != coord_y) {
+      row->resize(coord_x);
       ++row;
       ++n;
     }

@@ -56,23 +56,23 @@ public:
   void data_changed() override;
 
 private:
-  short x, y;
+  short coord_x, coord_y;
   MapModel *map_model;
   struct smth_elm {
     pos cur, min, max;
     smth_elm() { smth_elm_model = 0; }
     void swap() {
-      auto temp = min.y;
-      min.y = min.x;
-      min.x = temp;
-      temp = max.y;
-      max.y = max.x;
-      max.x = temp;
+      auto temp = min.coord_y;
+      min.coord_y = min.coord_x;
+      min.coord_x = temp;
+      temp = max.coord_y;
+      max.coord_y = max.coord_x;
+      max.coord_x = temp;
     }
     AbstractModel *smth_elm_model;
   };
   smth_elm elm, elm2;
-  bool proverka_size(const short &x, const short &y) { return true; };
+  bool proverka_size(const short &coord_x, const short &coord_y) { return true; };
   void map_model_delete_row(int row) {
     this->map_model->DeleteRow(row);
   }

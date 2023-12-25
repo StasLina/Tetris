@@ -47,8 +47,8 @@ public:
   void SetBlokShape(const std::string &smth_str);
 
   // void cout_matr();
-  inline std::pair<short, short> GetItemPosition(const short &x,
-                                                 const short &y);
+  inline std::pair<short, short> GetItemPosition(const short &coord_x,
+                                                 const short &coord_y);
   void SetModelSize(unsigned short col_count,
                     unsigned short row_count) override;
   void SetParent(AbstractModel *parent) override;
