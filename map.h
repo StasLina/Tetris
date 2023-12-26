@@ -1,10 +1,12 @@
 #pragma once
+
 #include "GlobalVars.h"
 
 #include <ios>
 #include <mutex>
 #include <string>
 #include <thread>
+
 class MapController : public AbstractMapController {
 public:
   MapController();

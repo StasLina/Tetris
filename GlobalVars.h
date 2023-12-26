@@ -1,11 +1,13 @@
 #pragma once
 #ifndef GLOBAL_VARS_H
 #define GLOBAL_VARS_H
+
 #include <iostream>
 #include <list>
 #include <map>
 #include <ostream>
 #include <vector>
+
 struct pos {
   int coord_x, coord_y;
 };
@@ -37,6 +39,7 @@ public:
     }
   }
 };
+
 class ModelIndex {
 public:
   ModelIndex(){};
@@ -50,6 +53,7 @@ public:
     return os;
   }
 };
+
 class AbstractModel {
 public:
   virtual const ModelIndex &GetModelIndex(short const &pox_x,
@@ -72,6 +76,7 @@ public:
   virtual AbstractModel *GetCopy() { return 0; };
   static std::map<int, AbstractModel *> list_bloks;
 };
+
 class AbstractView {
 public:
   virtual void SetModel(AbstractModel *input_model) {
@@ -93,6 +98,7 @@ public:
 private:
   AbstractModel *model;
 };
+
 class StandartModel : public AbstractModel {
 public:
   const ModelIndex &GetModelIndex(short const &pos_x,
@@ -153,6 +159,7 @@ class AbstractMapController {
 public:
   virtual void data_changed(){};
 };
+
 class MapModel : public StandartModel {
   AbstractMapController *controller;
   void data_changed() override { controller->data_changed(); };

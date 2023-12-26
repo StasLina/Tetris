@@ -4,8 +4,8 @@
 
 #include <list>
 #include <vector>
-class BlockModel : public AbstractBlockModel {
 
+class BlockModel : public AbstractBlockModel {
 public:
   BlockModel(std::string data) : AbstractBlockModel() {
     SetBlokShape(data);

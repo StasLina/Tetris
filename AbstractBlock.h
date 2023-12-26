@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string>
+
 class AbstractBlockModel : public AbstractModel {
   virtual void after_rotation(){};
 
