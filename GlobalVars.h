@@ -151,8 +151,6 @@ public:
     }
   };
   std::list<std::vector<ModelIndex>> data;
-
-private:
 };
 
 class AbstractMapController {
