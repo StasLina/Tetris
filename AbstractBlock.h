@@ -11,14 +11,14 @@ public:
   AbstractBlockModel();
 
   virtual void SetBlokShape(const std::string &smth_str) { return; };
-  enum types_rotation {
+  enum rotation_types {
     rotate_0 = 0,
     rotate_90 = 1,
     rotate_180 = 2,
     rotate_270 = 3
   };
-  types_rotation GetRotateBlockLeft();
-  types_rotation GetRotateBlockRight();
+  rotation_types GetRotateBlockLeft();
+  rotation_types GetRotateBlockRight();
   virtual void RotateLeft() {
     cur_rotation = GetRotateBlockLeft();
 
@@ -32,5 +32,5 @@ public:
   }
   virtual void MoveLeft() { return; }
   virtual void MoveRight() { return; }
-  types_rotation cur_rotation = rotate_0;
+  rotation_types cur_rotation = rotate_0;
 };

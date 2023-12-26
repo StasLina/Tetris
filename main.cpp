@@ -9,7 +9,7 @@
 
 int GlobalVars::x_size = 10;
 int GlobalVars::y_size = 10;
-bool GlobalVars::need_new_block = true;
+bool GlobalVars::is_need_new_block = true;
 std::map<int, AbstractModel *> AbstractModel::list_bloks;
 short GlobalVars::wide_scale = 2;
 
@@ -119,7 +119,7 @@ int main() {
   elm = new BlockModel(*GetRandomBlock());
   elm->SetParent(map_model);
   map->AddSecondSmthElm(elm);
-  GlobalVars::need_new_block = false;
+  GlobalVars::is_need_new_block = false;
   map->StartGame();
 
   while (true) {
@@ -155,7 +155,7 @@ int main() {
       elm = new BlockModel(*GetRandomBlock());
       elm->SetParent(map_model);
       map->AddSecondSmthElm(elm);
-      GlobalVars::need_new_block = false;
+      GlobalVars::is_need_new_block = false;
       map->StartGame();
       break;
     }

@@ -9,14 +9,14 @@
 #include <vector>
 
 struct pos {
-  int coord_x, coord_y;
+  int pos_x, pos_y;
 };
 
 class GlobalVars {
 public:
   static int x_size;
   static int y_size;
-  static bool need_new_block;
+  static bool is_need_new_block;
   static short wide_scale;
   friend bool operator<=(GlobalVars &index1,
                          const GlobalVars &index2) {
@@ -48,7 +48,7 @@ public:
   // pos position;
   friend std::ostream &operator<<(std::ostream &os,
                                   const ModelIndex &index) {
-    os << index.data << index.data;
+    os <<  index.data << index.data;
 
     return os;
   }
@@ -65,7 +65,7 @@ public:
                              const short &pos_y){};
   virtual unsigned short GetXSize() { return 0; }
   virtual unsigned short GetYSize() { return 0; }
-  virtual void SetModelSize(unsigned short coord_x, unsigned short coord_y) {
+  virtual void SetModelSize(unsigned short pos_x, unsigned short pos_y) {
     return;
   };
   virtual void data_changed(){};
@@ -86,10 +86,10 @@ public:
     auto x_size = model->GetXSize();
     auto y_size = model->GetYSize();
 
-    for (unsigned short coord_y = 0; coord_y != y_size; coord_y++) {
+    for (unsigned short pos_y = 0; pos_y != y_size; pos_y++) {
 
-      for (unsigned short coord_x = 0; coord_x != x_size; coord_x++) {
-        std::cout << model->GetModelIndex(coord_x, coord_y);
+      for (unsigned short pos_x = 0; pos_x != x_size; pos_x++) {
+        std::cout << model->GetModelIndex(pos_x, pos_y);
       }
       std::cout << std::endl;
     }
@@ -104,50 +104,50 @@ public:
   const ModelIndex &GetModelIndex(short const &pos_x,
                                   const short &pos_y) override {
     auto row = data.begin();
-    short n = 0;
+    short smth_offset = 0;
 
-    while (n != pos_y) {
+    while (smth_offset != pos_y) {
       ++row;
-      ++n;
+      ++smth_offset;
     }
-    n = 0;
+    smth_offset = 0;
     auto col = row->begin();
 
-    while (n != pos_x) {
+    while (smth_offset != pos_x) {
       ++col;
-      ++n;
+      ++smth_offset;
     }
     return *col;
   };
   void SetModelIndex(const ModelIndex &smth_index, const short &pos_x,
                      const short &pos_y) override {
     auto row = data.begin();
-    short n = 0;
+    short smth_offset = 0;
 
-    while (n != pos_y) {
+    while (smth_offset != pos_y) {
       ++row;
-      ++n;
+      ++smth_offset;
     }
-    n = 0;
+    smth_offset = 0;
     auto col = row->begin();
 
-    while (n != pos_x) {
+    while (smth_offset != pos_x) {
       ++col;
-      ++n;
+      ++smth_offset;
     }
     *col = smth_index;
   };
   unsigned short GetXSize() override { return data.begin()->size(); }
   unsigned short GetYSize() override { return data.size(); }
-  void SetModelSize(unsigned short coord_x, unsigned short coord_y) override {
-    data.resize(coord_y);
+  void SetModelSize(unsigned short pos_x, unsigned short pos_y) override {
+    data.resize(pos_y);
     auto row = data.begin();
-    short n = 0;
+    short smth_offset = 0;
 
-    while (n != coord_y) {
-      row->resize(coord_x);
+    while (smth_offset != pos_y) {
+      row->resize(pos_x);
       ++row;
-      ++n;
+      ++smth_offset;
     }
   };
   std::list<std::vector<ModelIndex>> data;

@@ -44,11 +44,11 @@ public:
       return max_col;
     }
   }
-  void SetBlokShape(const std::string &smth_str);
+  void SetBlockShape(const std::string &smth_str);
 
   // void cout_matr();
-  inline std::pair<short, short> GetItemPosition(const short &coord_x,
-                                                 const short &coord_y);
+  inline std::pair<short, short> GetItemPosition(const short &pos_x,
+                                                 const short &pos_y);
   void SetModelSize(unsigned short col_count,
                     unsigned short row_count) override;
   void SetParent(AbstractModel *parent) override;
